@@ -39,6 +39,7 @@
         battery: { type: 'battery' },
         memory: { type: 'memory' },
         weather: { type: 'weather' },
+        media: { type: 'media' }
       });
 
       createRoot(document.getElementById('root')).render(<App />);
@@ -78,6 +79,14 @@
                 <i className="nf nf-md-wifi_strength_off_outline"></i>
               );
           }
+        }
+
+        // Return the artist and song currently playing
+        function getNowPlaying(mediaOutput) {
+          let session = mediaOutput.currentSession;
+          let artist = !session.albumArtist ? session.artist : session.albumArtist;
+
+          return `${session.title} - ${artist}`
         }
 
         // Get icon to show for how much of the battery is charged.
@@ -173,6 +182,13 @@
             <div className="center">{output.date?.formatted}</div>
 
             <div className="right">
+              {output.media && output.media.currentSession.sessionId === "Spotify.exe" && (
+                <div className="nowplaying">
+                  <i className={output.media.currentSession.isPlaying ? "nf nf-fa-music": ""}></i>
+                  {output.media.currentSession.isPlaying ? getNowPlaying(output.media) : ""}
+                </div>
+              )}
+
               {output.network && (
                 <div className="network">
                   {getNetworkIcon(output.network)}

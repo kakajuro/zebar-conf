@@ -56,7 +56,8 @@ body,
 .network,
 .memory,
 .cpu,
-.battery {
+.battery,
+.nowplaying {
   margin-right: 20px;
 }
 
