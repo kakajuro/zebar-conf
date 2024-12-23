@@ -183,7 +183,7 @@
 
               {output.memory && (
                 <div className="memory">
-                  <i className="nf nf-fae-chip"></i>
+                  <i className={output.memory > 90 ? "nf nf-fae-chip high-usage" : "nf nf-fae-chip"}></i>
                   {Math.round(output.memory.usage)}%
                 </div>
               )}
