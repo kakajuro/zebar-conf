@@ -86,17 +86,17 @@ body,
 
 .binding-mode,
 .tiling-direction {
-  background: rgb(255 255 255 / 15%);
-  color: rgb(255 255 255 / 90%);
+  background-color: transparent;
+  padding-inline: 15px;
+  color: rgb(115 130 175 / 95%);
   border-radius: 2px;
   line-height: 1;
-  padding: 4px 8px;
   border: 0;
   cursor: pointer;
 }
 
 .binding-mode {
-  margin-right: 4px;
+  margin-right: 2px;
 }
 
 .cpu .high-usage {
