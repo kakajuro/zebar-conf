@@ -182,18 +182,12 @@
             <div className="center">{output.date?.formatted}</div>
 
             <div className="right">
-              {() => {
-                if (output.media) {
-                  if (output.media.currentSession.sessionId === "Spotify.exe") {
-                    return (
-                      <div className="nowplaying">
-                        <i className={output.media.currentSession.isPlaying ? "nf nf-fa-music": ""}></i>
-                        {output.media.currentSession.isPlaying ? getNowPlaying(output.media) : ""}
-                      </div>
-                    )
-                  }
-                }
-              }}
+              {output.media && output?.media?.currentSession?.sessionId === "Spotify.exe" && (
+                  <div className="nowplaying">
+                    <i className={output.media.currentSession.isPlaying ? "nf nf-fa-music": ""}></i>
+                    {output.media.currentSession.isPlaying ? getNowPlaying(output.media) : ""}
+                  </div>
+                )}
 
               {output.network && (
                 <div className="network">
