@@ -8,7 +8,7 @@
   "transparent": false,
   "presets": [
     {
-      "name": "default",
+      "name": "defaultmain",
       "anchor": "top_left",
       "offsetX": "0px",
       "offsetY": "0px",
