@@ -84,9 +84,38 @@
         // Return the artist and song currently playing
         function getNowPlaying(mediaOutput) {
           let session = mediaOutput.currentSession;
+
+          if (session.sessionId != "Spotify.exe") {
+            let spotifySessionId;
+
+            mediaOutput.allSesions?.forEach(session => {
+              console.log(session.sessionId);
+              if (session.sessionId === "Spotify") {
+                spotifySessionId = mediaOutput.allSesions.indexOf(session);
+              }
+            })
+
+            if (spotifySessionId) {
+              session = mediaOutput.allSesions[spotifySessionId];
+            } else {
+              return;
+            }
+          }
+
           let artist = !session.albumArtist ? session.artist : session.albumArtist;
 
-          return `${session.title} | ${artist}`
+          return `${session.title} | ${artist}`;
+        }
+
+        const spotifySessionExists = (mediaOutput) => {
+          let spotifySession = false;
+          mediaOutput.allSessions.forEach(session => {
+            if (session.sessionId === "Spotify.exe") {
+              spotifySession = true;
+            }
+          });
+
+          return spotifySession;
         }
 
         // Get icon to show for how much of the battery is charged.
@@ -182,10 +211,10 @@
             <div className="center">{output.date?.formatted}</div>
 
             <div className="right">
-              {output.media && output?.media?.currentSession?.sessionId === "Spotify.exe" && (
+              {output.media && (
                   <div className="nowplaying">
-                    <i className={output.media.currentSession.isPlaying ? "nf nf-fa-music": ""}></i>
-                    {output.media.currentSession.isPlaying ? getNowPlaying(output.media) : ""}
+                    <i className={output.media.currentSession?.isPlaying && output.media.currentSession.sessionId === "Spotify.exe" ? "nf nf-fa-music": ""}></i>
+                    {output.media.currentSession?.isPlaying && spotifySessionExists(output.media) ? getNowPlaying(output.media) : ""}
                   </div>
                 )}
 
